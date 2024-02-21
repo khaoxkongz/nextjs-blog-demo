@@ -2,6 +2,7 @@
 
 import { SignJWT, importJWK } from "jose";
 import { cookies } from "next/headers";
+import { redirect } from "next/navigation";
 
 export default async function login(prevState, formData) {
     const email = formData.get("email");
@@ -24,5 +25,5 @@ export default async function login(prevState, formData) {
         .sign(secretKey);
     cookies().set("token", token);
 
-    return { message: "login success" };
+    redirect("/manage/blog");
 }
