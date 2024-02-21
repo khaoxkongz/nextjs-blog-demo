@@ -28,6 +28,9 @@ export default async function Page() {
             {blogs.map((blog, index) => (
                 <div key={index}>
                     {blog.id} {blog.name}
+                    <button className="px-4 m-1 bg-blue-400 rounded-full">
+                        Go to read blog...
+                    </button>
                 </div>
             ))}
         </div>
