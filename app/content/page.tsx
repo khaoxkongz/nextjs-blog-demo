@@ -21,7 +21,6 @@ async function getBlogs() {
 
 export default async function Page() {
     const blogs: IBlogContents[] = await getBlogs();
-    console.log("blogs", blogs);
 
     return (
         <div>

@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useState } from "react";
+import { submitForm } from "./action";
 
 interface IBlogContents {
     id: number;
@@ -26,6 +27,8 @@ async function getBlogs() {
 export default function Page() {
     const [blogState, setBlogState] = useState<IBlogContents[]>([]);
 
+    
+
     const initBlog = async () => {
         try {
             const result = await getBlogs();
@@ -37,10 +40,7 @@ export default function Page() {
 
     useEffect(() => {
         initBlog();
-        console.log("use effect");
     }, []);
-
-    console.log(blogState);
 
     return (
         <div>
@@ -50,6 +50,10 @@ export default function Page() {
                     {blog.id} {blog.name}
                 </div>
             ))}
+            <form action={submitForm}>
+                Email <input name="email" />
+                <button>Submit</button>
+            </form>
         </div>
     );
 }
