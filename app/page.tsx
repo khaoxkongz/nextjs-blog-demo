@@ -1,3 +1,5 @@
+import Link from "next/link";
+
 interface IBlogContents {
     id: number;
     name: string;
@@ -28,9 +30,12 @@ export default async function Page() {
             {blogs.map((blog, index) => (
                 <div key={index}>
                     {blog.id} {blog.name}
-                    <button className="px-4 m-1 bg-blue-400 rounded-full">
+                    <Link
+                        href={`blog/${blog.id}`}
+                        className="px-4 m-1 bg-blue-400 rounded-full"
+                    >
                         Go to read blog...
-                    </button>
+                    </Link>
                 </div>
             ))}
         </div>
