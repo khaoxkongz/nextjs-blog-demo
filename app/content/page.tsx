@@ -7,7 +7,7 @@ interface IBlogContents {
     description: string;
 }
 
-export async function getBlogs() {
+async function getBlogs() {
     const response = await fetch(
         "https://65d580193f1ab8c634371a4e.mockapi.io/blogs"
     );
