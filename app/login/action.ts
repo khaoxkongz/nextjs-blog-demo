@@ -1,6 +1,7 @@
 "use server";
 
 import { SignJWT, importJWK } from "jose";
+import { cookies } from "next/headers";
 
 export default async function login(prevState, formData) {
     const email = formData.get("email");
@@ -21,5 +22,7 @@ export default async function login(prevState, formData) {
         .setIssuedAt()
         .setExpirationTime("1h")
         .sign(secretKey);
-    console.log(token);
+    cookies().set("token", token);
+
+    return { message: "login success" };
 }
