@@ -1,5 +1,7 @@
 "use client";
 
+import { useEffect, useState } from "react";
+
 interface IBlogContents {
     id: number;
     name: string;
@@ -21,9 +23,33 @@ async function getBlogs() {
     return response.json();
 }
 
-export default async function Page() {
-    const blogs = await getBlogs();
-    console.log("blog", blogs)
+export default function Page() {
+    const [blogState, setBlogState] = useState<IBlogContents[]>([]);
 
-    return <div>Test Page 2</div>;
+    const initBlog = async () => {
+        try {
+            const result = await getBlogs();
+            setBlogState(result);
+        } catch (error) {
+            console.log("error", error);
+        }
+    };
+
+    useEffect(() => {
+        initBlog();
+        console.log("use effect");
+    }, []);
+
+    console.log(blogState);
+
+    return (
+        <div>
+            Test Page 2
+            {blogState.map((blog, index) => (
+                <div key={index}>
+                    {blog.id} {blog.name}
+                </div>
+            ))}
+        </div>
+    );
 }
